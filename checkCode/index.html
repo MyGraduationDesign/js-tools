@@ -1,4 +1,5 @@
-﻿<html>
+
+<html>
 	<head>
 		<title>验证码</title>
 		<style type="text/css">
@@ -12,7 +13,21 @@
 				color:blue;
 			}
 		</style>
-		<script type = "text/javascript" src = "checkCode.js">
+		<script type = "text/javascript" src = "checkCode.js"></script>
+		<script type = "text/javascript">
+			//动态时间显示
+			var t = null;
+			t = setTimeout(time,1000);//开始执行
+			function time()
+			{
+				clearTimeout(t);//清除定时器
+				dt = new Date();
+				var h=dt.getHours();
+				var m=dt.getMinutes();
+				var s=dt.getSeconds();
+				document.getElementById("showtimes").innerHTML =  "现在的时间为："+h+"时"+m+"分"+s+"秒";
+				t = setTimeout(time,1000); //设定定时器，循环执行
+			}
 		</script>
 	</head>
 	<body>
@@ -20,6 +35,7 @@
 			<input type = "text" id = "input"/>
 			<input type = "button" id="code" onclick="createCode()"/>
 			<input type = "button" value = "验证" onclick = "validate()"/>
+			<lable id="showtimes" style="color: red"><script language="javascript">time();</script></lable>
 		</div>
 	</body>
 </html>
